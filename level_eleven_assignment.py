@@ -35,14 +35,15 @@ while True:
         break
 
 # Add a new column for recommended status
-video_game_data['Recommended'] = 'default'
+video_game_data["Recommended"] = "No"
+
 
 # Update recommended status
-for index, row in video_game_data.iterrows():
-    if row['Price'] <= 40 and row['Rating'] >= 8:
-        video_game_data.at[index, 'Recommended'] = 'Yes'
-    else:
-        video_game_data.at[index, 'Recommended'] = 'No'
+video_game_data.loc[
+    (video_game_data["Rating"] >= 8) &
+    (video_game_data["Price"] <= 40),
+    "Recommended"
+] = "Yes"
 
 
 # Filter recommended games
